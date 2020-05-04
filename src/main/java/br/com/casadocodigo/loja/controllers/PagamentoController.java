@@ -19,15 +19,6 @@ import br.com.casadocodigo.loja.models.DadosPagamento;
 import br.com.casadocodigo.loja.models.Usuario;
 
 
-/**
- * Processo de pagamento ocorre como envio de um JSON com index "value" e um valor numérico > {"value":100}
- * 
- * para a URL da "operadora" > http://book-payment.herokuapp.com/payment
- * 
- * */
-
-
-
 @RequestMapping("/pagamento")
 @Controller
 public class PagamentoController {
@@ -35,48 +26,27 @@ public class PagamentoController {
 	@Autowired
 	private CarrinhoCompras carrinho;
 	
-	//RestTemplate > faz a integração das apis via http
-	//RestTemplate anotado como 'Bean' em WebAppConfiguration p q o Spring reconheça o RestTemplate
+
 	@Autowired
 	private RestTemplate restTemplate;
 	
 	@Autowired
 	private MailSender sender;
-	
-	
-	
-	//"/pagamento/finalizar"
+
 	@RequestMapping(value="/finalizar", method = RequestMethod.POST)
-															
-										//recebendo o usuario p envio do email
-										//AuthenticationPrincipal - Spring injeta o usuario
-	public Callable<ModelAndView> finalizar(@AuthenticationPrincipal Usuario usuario,
-											//flash > para enviar info de pagamento OK
-												RedirectAttributes model) {
-		/**REQUISIÇÃO - ASSÍNCRONA
-		 * 
-		 * Callable auxilia na comunicação 'assincrona' > trabalhando com as rsquests de forma concorrente
-		 * > Não espera o final da transação para começar outra
-		 * 
-		 * Callable é classe anônima e o retorno é uma classe anônima return ()->{}
-		 * */
+
+	public Callable<ModelAndView> finalizar(@AuthenticationPrincipal Usuario usuario, RedirectAttributes model) {
+	
 			
 			return ()->{
-			//setando a url da operadoera
 			String uri = "http://book-payment.herokuapp.com/payment";
 			
 			try {
-				/**Add dependencias no pom.xml do 'jackson' para trabalhar com o JSON*/
-				//postForObject > envia o Objeto "DadosPagamento/" para a uri informada, e retorna uma String.class 
 				String response = restTemplate.postForObject(uri, new DadosPagamento(carrinho.getTotal()), 
 						String.class);
 				
 				System.out.println(response);
-	
-				//add envio de email ao cliente informando sobre a finalização do 
-				enviaEmailCompraProduto(usuario);
-				
-				//parâmetro 'mensagem' é como o valor será esgatao na JSP 
+				enviaEmailCompraProduto(usuario);				
 				model.addFlashAttribute("sucesso", response);
 				return new ModelAndView("redirect:/produtos");
 				
@@ -85,7 +55,7 @@ public class PagamentoController {
 				model.addFlashAttribute("falha", "Valor maoir que o permitido");
 				return new ModelAndView("redirect:/produtos");
 			}	
-		}; 			//necessário ";" pois se trata de um 'return'	
+		}; 			
 	}
 
 	private void enviaEmailCompraProduto(Usuario usuario) {
