@@ -41,7 +41,7 @@
 		  <ul class="nav navbar-nav navbar-right">
 			<li>
 			  <a href="#"> 
-				  <!--"principal" - usuario logado -->
+				
 				  <security:authentication property="principal" var="usuario"/>
 				  Usuário: ${usuario.username} 
 			  </a>
@@ -50,32 +50,20 @@
 				<a href="${contextPath}logout">Sair</a>
 			</li>
 		  </ul>
-		  </div><!-- /.navbar-collapse -->
+		  </div>
 		</div>
 	  </nav>
 
 	<div class="container">
 		<h1>Cadastro de Produto</h1>
 		
-		<!--Substituido a HTML form pelo form:form do jstl em virtude das funcionalidades 
-		-commandName="produto" > identifica o formulario como objeto produto e facilita ao "chamar" atributos
 		
-		from:errors - utilizado para reportar mensagens do arquivo massages.proprieties
-		
-		
-		s:mvcUrl('PC#gravar') >> notação jstl para otimizar a passagem de referencia do endereço de destino
-		PC > abreviação de ProdutoController
-		#gravar() > referencia o metodo gravar dentro da Classe ProdutoController
-		-->
 		<form:form action="${ s:mvcUrl('PC#gravar').build() }" method="post" commandName="produto" enctype="multipart/form-data">
-		<!-- enctype="multpart/form-data" >> configurando o form para transportar arquivo -->
 			<div cssClass="form-group">
 				<label>Título</label> 
 				<form:input path="titulo" cssClass="form-control"/>
 				<form:errors path="titulo" />
 				
-				<!-- <input type="text" name="titulo" /> Atualizado os inputs para form:input 
-				caso haja algum erro com algum input.. os inputs que possuem valor ok.. não serão zerados-->
 			</div>
 			<div cssClass="form-group">
 				<label>Descrição</label>
