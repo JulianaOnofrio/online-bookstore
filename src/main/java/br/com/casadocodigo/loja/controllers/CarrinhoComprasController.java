@@ -44,7 +44,6 @@ public class CarrinhoComprasController {
 
 	
 	private CarrinhoItem criaItaem(Integer produtoId, TipoPreco tipoPreco) {
-		//usando o produtoDAO para buscar o poroduto pelo id
 		Produto produto = produtoDao.find(produtoId);
 		
 		CarrinhoItem carrinhoItem = new CarrinhoItem(produto, tipoPreco);
