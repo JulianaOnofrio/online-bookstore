@@ -14,27 +14,9 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-/** Copia da classe Original JPA Configuration
- * 
- * Original foi alterada pa deploy no heroku
- */
-
-/**
- * Classe JPAConfiguration habilida a conexão com o banco de dados e fornece as
- * credencias para acesso;
- * 
- * informações como Driver e dialeto dos protocolos > MySQL, Mariadb, SQL são
- * configurados aqui
- * 
- * Caso haja necessidade de mudança de banco de dados, basta alter Driver e
- * dialetos
- */
-
-//habilida a transação spring com o banco
 @EnableTransactionManagement
 public class JPAConfigurationCopy {
 
-	// nota como classe Spring
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
 
@@ -42,18 +24,9 @@ public class JPAConfigurationCopy {
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		factoryBean.setJpaVendorAdapter(vendorAdapter);
 
-		/**
-		 * Atualizado o cod para chamar o metodo dataSourvce com as credenciais do BD
-		 */
-
 		factoryBean.setDataSource(dataSource);
 
-		// passando informações ao Spring
 		factoryBean.setJpaProperties(additionalProperties());
-
-		// propriedades da conexão com o banco - dialetos e Driver em função do tipo de
-		// banco > mariadb, MySQL, SQL
-//		Properties properties = additionalProperties(); > atualizado codigo
 
 		factoryBean.setPackagesToScan("br.com.casadocodigo.loja.models");
 
@@ -68,20 +41,17 @@ public class JPAConfigurationCopy {
 		return properties;
 	}
 
-	// separando as credenciais do banco para evitar reescrita
-	// este trecho do cod tb será acessado pela classe de testes
 	@Bean
 	@Profile("dev")
 	private DriverManagerDataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setUsername("root");
-		dataSource.setPassword("#Diego1983#");
+		dataSource.setPassword("");
 		dataSource.setUrl("jdbc:mysql://localhost/casadocodigo");
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		return dataSource;
 	}
 
-	// classe spring que cria o Entity manager
 	@Bean
 	public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
 		return new JpaTransactionManager(emf);
