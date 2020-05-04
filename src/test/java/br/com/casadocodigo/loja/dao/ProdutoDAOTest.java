@@ -18,27 +18,20 @@ import br.com.casadocodigo.loja.conf.JPAConfiguration;
 import br.com.casadocodigo.loja.models.Produto;
 import br.com.casadocodigo.loja.models.TipoPreco;
 
-/**Os testes não serão gerenciados pelo JUnit, mas sim pelo spring
- * setado em "TunWith"
- * 
- * 
- * */
 
 
-//config a classe que rodará os testes
+
 @RunWith(SpringJUnit4ClassRunner.class)
-//apontando arquivosde conf
 @ContextConfiguration(classes= {JPAConfiguration.class, ProdutoDAO.class, DataSourceConfigurationTest.class})
-//Anotando no spring uma nova rota para o BD de testes
 @ActiveProfiles("test")
 public class ProdutoDAOTest{
 
 	@Autowired
 	private ProdutoDAO produtoDAO;
 	
-	//anotação do JUnit
+	
 	@Test
-	@Transactional //spring
+	@Transactional 
     public void deveSomarTodosPrecosPorTIpoLivro(){
         List<Produto> livrosImpressos = ProdutoBuilder.newProduto(TipoPreco.IMPRESSO, BigDecimal.TEN)
         		.more(3).buildAll();
