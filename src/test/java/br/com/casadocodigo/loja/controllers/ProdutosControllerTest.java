@@ -29,12 +29,6 @@ import br.com.casadocodigo.loja.conf.SpringSecurityFilterConfiguration;
 import br.com.casadocodigo.loja.dao.ProdutoDAO;
 
 
-/**
- * Classe de testes com a pg '/' - home
- * 
- * para fins de testes, comentar a anotação @EnableCaching em AppWebConfiguration 
- * 
- * */
 
 
 @WebAppConfiguration
@@ -52,7 +46,7 @@ public class ProdutosControllerTest {
 	
 	private MockMvc mockMvc;
 	
-	//anotando para ser executado antes
+	
 	@Before
 	public void setup(){
 	    mockMvc = MockMvcBuilders.webAppContextSetup(wac)
@@ -63,19 +57,15 @@ public class ProdutosControllerTest {
 	@Test
 	public void deveRetornarParaHomeComOsLivros() throws Exception{
 	    mockMvc.perform(MockMvcRequestBuilders.get("/"))
-	    		//verifica se o retorno ainda tras um atributo 'produto'
 	            .andExpect(MockMvcResultMatchers.model().attributeExists("produtos"))
-	            //verifica se o '/' aponta de fato para o uri
 	            .andExpect(MockMvcResultMatchers.forwardedUrl("/WEB-INF/views/home.jsp"));
 	}
 	
 	@Test
 	public void somenteAdminDeveAcessarProdutosForm() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get("/produtos/form")
-				//Usando parte de scurity do MVC - add dependencia no pom.xml
 				.with(SecurityMockMvcRequestPostProcessors
 						.user("user@casadocodigo.com.br").password("123456")
-						//testanto s usr USUARIO eh bloqueado ao acessar - ADMIN retorna 200
 						.roles("USUARIO")))
 				.andExpect(MockMvcResultMatchers.status().is(403));
 	}
