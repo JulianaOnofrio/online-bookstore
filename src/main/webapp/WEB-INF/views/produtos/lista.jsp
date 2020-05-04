@@ -73,9 +73,6 @@
 			<c:forEach items="${produtos }" var="produto">
 				<tr>
 					<td>
-						<!-- usando o spring para acionar a url via classe -->
-						<!-- arg - recebendo id por argumentos do 'PC'(ProdutosController) '0' eh padrão -->
-						<!-- cada link apontará o o seu respectivo produto e seu próprio 'id' -->
 						<a href="${s:mvcUrl('PC#detalhe').arg(0, produto.id).build()}">${produto.titulo }</a>
 					</td>
 					<td>
