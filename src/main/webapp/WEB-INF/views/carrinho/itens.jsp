@@ -44,8 +44,7 @@
 							</td>
 							<td class="numeric-cell">${carrinhoCompras.getTotal(item) }</td>
 							<td class="remove-item">
-										<!-- link para CarrinhoCompresController passando o id do produto como argumento 
-										mvcUrl passa um array onde os arg possuem indices - 0, 1, -->
+										
 									<form:form action="${s:mvcUrl('CCC#remover').arg(0, item.produto.id).arg(1, item.tipoPreco).build() }" method="post">
 										<input type="image" src="/excluir.png" alt="Excluir" title="Excluir" />
 									</form:form>
@@ -56,7 +55,7 @@
 				<tfoot>
 					<tr>
 						<td colspan="1">
-							<!-- PC - PagamentoController.finalizar() -->
+							
 							<form:form servletRelativeAction="${s:mvcUrl('PC#finalizar').build()}" method="post" cssClass="container">
 								<input type="submit" class="checkout" name="checkout" value="Finalizar compra" />
 							</form:form>
