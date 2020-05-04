@@ -13,16 +13,9 @@ import javax.persistence.Id;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-
-/**
- * Classe Entidade Produto
- * */
-
-//nota a clesse como entidade
 @Entity
 public class Produto {
 	
-	//'Id' > nota a PK				'strategy' > passa a gestão do atributo para o BD e seta o Auto Increment
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
@@ -30,16 +23,12 @@ public class Produto {
 	private String descricao;
 	private int paginas;
 	
-	//notando o formato da data no spring
-	@DateTimeFormat //(pattern = "dd/MM/yyyy") >> atualizado junto a classe AppWebConfig >> mvcConversionService()
+	@DateTimeFormat 
 	private Calendar dataLancamento;
 
-
-	//nota a relação via spring entre Preços e Produto formando uma tabela no BD
 	@ElementCollection
 	private List<Preco> precos = new ArrayList<>();
 	
-	//String que armazena o caminho para o arquivo
 	private String sumarioPath;
 	
 	
