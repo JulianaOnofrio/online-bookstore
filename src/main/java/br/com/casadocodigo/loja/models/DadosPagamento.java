@@ -6,7 +6,6 @@ public class DadosPagamento {
 	public DadosPagamento(BigDecimal value) {
 		this.value = value;
 	}
-	//criando construtor padrão para q o objeto possa ser incializado mesmo sem valores
 	public DadosPagamento() {
 	}
 	
