@@ -13,14 +13,6 @@ import javax.persistence.OneToMany;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-/**Classe para fornecer os dados para a tablea usuario no BD 
- * 
- * Objeto Usuário fornece as credenciais para acesso à apliocação
- * 
- * Os métodos Override são adicionados por implementar UserDatails
- * 
-*/
-
 @Entity
 public class Usuario implements UserDetails{
 	
@@ -60,7 +52,6 @@ public class Usuario implements UserDetails{
     }
     
     
-	//implementados em função do UserDatails
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return this.roles;
@@ -76,25 +67,21 @@ public class Usuario implements UserDetails{
 		return this.email;
 	}
 
-	//conta não expira
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}
 	
-	//conta não bloqueada
 	@Override
 	public boolean isAccountNonLocked() {
 		return true;
 	}
 
-	//credenciais não expira
 	@Override
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 
-	//conta habilitada
 	@Override
 	public boolean isEnabled() {
 		return true;
