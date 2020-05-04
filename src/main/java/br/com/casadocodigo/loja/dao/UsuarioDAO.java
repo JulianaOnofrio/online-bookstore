@@ -12,14 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import br.com.casadocodigo.loja.models.Usuario;
 
-/**Classe que fará a persistência do 'Usuário' no BD
- * 
- * Necessário que tanto o Usuario quanto UsuarioDAO
- * Implementem UserDetailsService
- * 
- */
-
-
 @Repository
 public class UsuarioDAO implements UserDetailsService{
 
