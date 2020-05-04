@@ -3,7 +3,6 @@ package br.com.casadocodigo.loja.models;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-//para trabalhar com mais de um objeto, implementar Serializable
 public class CarrinhoItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -15,7 +14,6 @@ public class CarrinhoItem implements Serializable {
 		this.tipoPreco = tipoPreco;
 	}
 	
-	//retornando o preco do item para o 'itens.jsp'
 	public BigDecimal getPreco() {
 		return produto.precoPara(tipoPreco);
 	}
@@ -37,7 +35,6 @@ public class CarrinhoItem implements Serializable {
 		this.tipoPreco = tipoPreco;
 	}
 
-	//retornando o valor total do carrinho
 	public BigDecimal getTotal(int quantidade) {
 		return this.getPreco().multiply(new BigDecimal(quantidade));
 	}
