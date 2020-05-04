@@ -37,7 +37,7 @@ public class ProdutosController {
 	@Autowired
 	private FileSaver fileSaver;
 	
-	@InitBinder //inicializa o metodo
+	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		
 		binder.addValidators(new ProdutoValidation());
