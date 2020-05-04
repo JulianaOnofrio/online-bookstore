@@ -7,13 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javassist.SerialVersionUID;
 
-/**Classe com dados da tabela Role do BD 
- * 
- * processo de autenticação de usuário via Spring
- * necessita implementação - GrantedAuthority
- * 
- * */
-
 @Entity
 public class Role implements GrantedAuthority{
 		
